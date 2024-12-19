@@ -9,7 +9,7 @@ const port = process.env.port || 4000;
 app.use(cors())
 app.use(express.json())
 
-// Mongodb
+// Mongodb---------
 const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.nvsxjlv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 const client = new MongoClient(url, {
     serverApi: {
