@@ -27,6 +27,8 @@ const dbConnect = async () => {
         const authorsCollection = client.db('bookHive').collection('authors')
         const publishersCollection = client.db('bookHive').collection('publishers')
         const reviewsCollection = client.db('bookHive').collection('reviews')
+        const wishlistsCollection = client.db('bookHive').collection('wishlists')
+        const cartsCollection = client.db('bookHive').collection('carts')
 
         // Books API
         app.get('/books', async (req, res) => {
@@ -86,7 +88,66 @@ const dbConnect = async () => {
             res.send(result)
         })
 
+        // Wishlist API
+        app.get('/wishlists/:email', async (req, res) => {
+            const query = { email: req.params.email }
+            const result = await wishlistsCollection.findOne(query)
+            res.send(result)
+        })
 
+        app.post('/wishlist/:email', async (req, res) => {
+            const email = req.params.email;
+            const { item } = req.body;
+            console.log(email, item)
+
+            const result = await wishlistsCollection.updateOne(
+                { email },
+                {
+                    $setOnInsert: { email },
+                    $addToSet: { list: item }
+                },
+                { upsert: true }
+            );
+            res.send(result);
+        });
+
+        app.patch('/wishlist/:email', async (req, res) => {
+            const email = req.params.email;
+            const { item } = req.body;
+
+            const result = await wishlistsCollection.updateOne(
+                { email },
+                {
+                    $setOnInsert: { email },
+                    $pull: { list: item }
+                }
+            );
+            res.send(result);
+        });
+
+
+        // Cart API
+        app.get('/carts/:email', async (req, res) => {
+            const query = { email: req.params.email }
+            const result = await cartsCollection.findOne(query)
+            res.send(result)
+        })
+
+        app.post('/cart/:email', async (req, res) => {
+            const email = req.params.email;
+            const { item } = req.body;
+            console.log(email, item)
+
+            const result = await cartsCollection.updateOne(
+                { email },
+                {
+                    $setOnInsert: { email },
+                    $addToSet: { list: item }
+                },
+                { upsert: true }
+            );
+            res.send(result);
+        });
 
 
         // await client.db("admin").command({ ping: 1 });
