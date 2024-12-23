@@ -15,14 +15,14 @@
 - **POST /register**: User registration.
 
 ### Buyer Endpoints
-- **GET /products**: Fetch all products.
-- **POST /wishlist**: Add a product to the wishlist.
-- **POST /cart**: Add a product to the cart.
+- **GET /books**: Fetch all books.
+- **POST /wishlist**: Add a book to the wishlist.
+- **POST /cart**: Add a book to the cart.
 
 ### Seller Endpoints
-- **POST /products**: Add a new product.
-- **PUT /products/:id**: Update a product.
-- **DELETE /products/:id**: Delete a product.
+- **POST /books**: Add a new book.
+- **PUT /book/:id**: Update a book.
+- **DELETE /book/:id**: Delete a book.
 
 ### Admin Endpoints
 - **GET /users**: Fetch all users.
@@ -61,30 +61,14 @@
 
 4. **Start the Server**:
    ```bash
-   npm start
+   nodemon index.js
    ```
 
 5. The server will be running at `http://localhost:5000`.
 
----
-
-## User Credentials
-### Buyer
-- **Email**: fahim@gmail.com
-- **Password**: Fahim111**
-
-### Seller
-- **Email**: rakib@gmail.com
-- **Password**: Rakib111**
-
-### Admin
-- **Email**: admin@bookhive.com
-- **Password**: Admin111**
-
----
 
 ## Deployment
-The backend server is deployed live at: [BookHive Backend Live Link](https://your-live-backend-url.vercel.app)
+The backend server is deployed live at: [BookHive Backend Live Link]([https://your-live-backend-url.vercel.app](https://book-hive-server-bakhtiar2000s-projects.vercel.app/))
 
 ---
 
@@ -93,15 +77,4 @@ The backend server is deployed live at: [BookHive Backend Live Link](https://you
 - Node.js
 - Express.js
 - MongoDB
-- Firebase Authentication
-- JWT for secure routes
 
----
-
-## Contribution
-Feel free to fork the repository and submit pull requests for new features or bug fixes!
-
----
-
-## License
-This project is licensed under the MIT License.
