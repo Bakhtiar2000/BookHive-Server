@@ -53,6 +53,19 @@ const dbConnect = async () => {
             res.send(result)
         })
 
+        app.put('/book/:id', async (req, res) => {
+            const { id } = req.params;
+            const updatedBookData = req.body;
+
+            const query = { _id: new ObjectId(id) };
+            const update = {
+                $set: updatedBookData,
+            };
+            const result = await booksCollection.updateOne(query, update);
+            res.send(result)
+        });
+
+
         // Users API
         app.get('/users', async (req, res) => {
             const result = await usersCollection.find().toArray()
@@ -74,6 +87,24 @@ const dbConnect = async () => {
             const result = await usersCollection.insertOne(user)
             res.send(result)
         })
+
+        app.patch('/users/role/:id', async (req, res) => {
+            const id = req.params.id;
+            const { role } = req.body;
+            console.log(id, role)
+            const result = await usersCollection.updateOne(
+                { _id: new ObjectId(id) },
+                { $set: { role } }
+            );
+            res.send(result)
+        });
+
+        app.delete('/users/:id', async (req, res) => {
+            const id = req.params.id;
+            const result = await usersCollection.deleteOne({ _id: new ObjectId(id) });
+            res.send(result)
+        });
+
 
         // Authors API
         app.get('/authors', async (req, res) => {
