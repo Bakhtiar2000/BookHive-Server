@@ -42,6 +42,11 @@ const dbConnect = async () => {
             const result = await booksCollection.findOne(query)
             res.send(result)
         })
+        app.get('/books/email/:email', async (req, res) => {
+            const query = { addedBy: req.params.email }
+            const result = await booksCollection.find(query).toArray()
+            res.send(result)
+        })
 
         app.post('/books', async (req, res) => {
             const result = await booksCollection.insertOne(req.body)
